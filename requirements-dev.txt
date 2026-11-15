@@ -1,0 +1,3 @@
+# Faqat ishlab chiqish uchun (productionga kerak emas)
+-r requirements.txt
+ruff>=0.6

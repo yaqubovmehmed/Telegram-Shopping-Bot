@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <meta name="theme-color" content="#1f6feb" />
+  <title>Do'kon</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">🛍</span>
+        <div class="brand-text">
+          <h1 id="shop-name">Do'kon</h1>
+          <p id="shop-sub">Tez va oson xarid</p>
+        </div>
+      </div>
+      <button id="cart-button" class="cart-button" type="button" aria-label="Savat">
+        <span aria-hidden="true">🛒</span>
+        <span id="cart-badge" class="badge" hidden>0</span>
+      </button>
+    </header>
+
+    <div id="banner" class="banner" hidden></div>
+
+    <div class="search-row">
+      <input id="search" type="search" inputmode="search" placeholder="🔍 Mahsulot qidirish…" autocomplete="off" />
+    </div>
+
+    <nav id="categories" class="chips" aria-label="Kategoriyalar"></nav>
+
+    <main id="products" class="grid" aria-live="polite"></main>
+    <p id="empty" class="empty" hidden>😔 Hech narsa topilmadi.</p>
+
+    <footer id="footer" class="footer">
+      <span id="shop-hours"></span>
+    </footer>
+  </div>
+
+  <!-- cart -->
+  <div id="cart-panel" class="sheet" hidden>
+    <div class="backdrop" data-close="cart"></div>
+    <section class="sheet-body" role="dialog" aria-modal="true" aria-label="Savat">
+      <header class="sheet-head">
+        <h2>🛒 Savat</h2>
+        <button class="icon-btn" type="button" data-close="cart" aria-label="Yopish">✕</button>
+      </header>
+      <div id="cart-items" class="cart-items"></div>
+      <div id="cart-summary" class="summary"></div>
+      <div class="sheet-actions">
+        <button id="send-to-bot" class="ghost" type="button">📤 Botga yuborish</button>
+        <button id="checkout-button" class="primary" type="button">Buyurtma berish</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- checkout -->
+  <div id="checkout-panel" class="sheet" hidden>
+    <div class="backdrop" data-close="checkout"></div>
+    <section class="sheet-body" role="dialog" aria-modal="true" aria-label="Buyurtma">
+      <header class="sheet-head">
+        <h2>🧾 Buyurtma</h2>
+        <button class="icon-btn" type="button" data-close="checkout" aria-label="Yopish">✕</button>
+      </header>
+      <form id="checkout-form" class="form" novalidate>
+        <label>Ism
+          <input name="name" required minlength="2" maxlength="120" autocomplete="name" />
+        </label>
+        <label>Telefon
+          <input name="phone" type="tel" required placeholder="+998 90 123 45 67" autocomplete="tel" />
+        </label>
+        <label>Yetkazish manzili
+          <textarea name="address" required minlength="5" maxlength="300" rows="2"
+            placeholder="Shahar, tuman, ko'cha, uy"></textarea>
+        </label>
+        <label>Izoh <span class="hint">(ixtiyoriy)</span>
+          <textarea name="comment" maxlength="300" rows="2"
+            placeholder="Kuryer uchun eslatma"></textarea>
+        </label>
+        <label>Promokod <span class="hint">(ixtiyoriy)</span>
+          <input name="promo" maxlength="32" autocapitalize="characters" />
+        </label>
+
+        <fieldset class="payments">
+          <legend>To'lov usuli</legend>
+          <label class="radio"><input type="radio" name="payment" value="cash" checked /> 💵 Yetkazib berishda naqd</label>
+          <label class="radio"><input type="radio" name="payment" value="card" /> 💳 Karta orqali o'tkazma</label>
+          <label class="radio"><input type="radio" name="payment" value="stars" /> ⭐️ Telegram Stars</label>
+        </fieldset>
+
+        <div id="card-info" class="card-info" hidden></div>
+        <div id="checkout-summary" class="summary"></div>
+        <p id="form-error" class="error" hidden></p>
+        <button id="submit-order" class="primary" type="submit">Buyurtmani tasdiqlash</button>
+        <button class="ghost" type="button" data-close="checkout">⬅️ Savatga qaytish</button>
+      </form>
+    </section>
+  </div>
+
+  <!-- success -->
+  <div id="success-panel" class="sheet" hidden>
+    <div class="backdrop"></div>
+    <section class="sheet-body success" role="dialog" aria-modal="true" aria-label="Buyurtma qabul qilindi">
+      <div class="success-icon">🎉</div>
+      <h2 id="success-title">Buyurtma qabul qilindi!</h2>
+      <p id="success-text" class="success-text"></p>
+      <button id="success-close" class="primary" type="button">Yopish</button>
+      <button id="success-orders" class="ghost" type="button">📦 Buyurtmalarim</button>
+    </section>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
