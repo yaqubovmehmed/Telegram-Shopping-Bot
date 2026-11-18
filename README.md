@@ -296,4 +296,4 @@ run.py                 # kirish nuqtasi
 
 ## 📄 Litsenziya
 
-Ichki foydalanish uchun. Savdo loyihangizga moslab o'zgartiring.
+MIT litsenziyasi: [LICENSE](LICENSE). Loyiha kodi va hujjatlarini MIT shartlariga muvofiq ishlatish, o'zgartirish va tarqatish mumkin.
